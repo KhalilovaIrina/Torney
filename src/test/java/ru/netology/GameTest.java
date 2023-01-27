@@ -9,22 +9,10 @@ public class GameTest {
     Player player2 = new Player(2, "Galaxy", 2);
     Player player3 = new Player(3, "Space", 2);
     Player player4 = new Player(4, "Negative", -1);
+    Player player5 = new Player(5, "Space", 4);
 
     @Test
-    public void shouldFindIfWinner2() {
-        game.register(player1);
-        game.register(player2);
-        game.register(player3);
-
-
-        int expected = 2;
-        int actual = game.round("Rocket", "Galaxy");
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
-    public void shouldFindIfWinner1() {
+    public void shouldFindIfWinnerFirst() {
         game.register(player1);
         game.register(player2);
         game.register(player3);
@@ -32,6 +20,19 @@ public class GameTest {
 
         int expected = 1;
         int actual = game.round("Galaxy", "Rocket");
+
+        Assertions.assertEquals(expected, actual);
+    }
+
+    @Test
+    public void shouldFindIfWinnerSecond() {
+        game.register(player1);
+        game.register(player2);
+        game.register(player3);
+
+
+        int expected = 2;
+        int actual = game.round("Rocket", "Galaxy");
 
         Assertions.assertEquals(expected, actual);
     }
@@ -97,9 +98,8 @@ public class GameTest {
     @Test
     public void shouldFindIfAlreadyExist() {
         game.register(player1);
-        game.register(player2);
         game.register(player3);
 
-        Assertions.assertThrows(NotRegisteredException.class, () -> game.round("Настоящий детектив", "Черная весна"));
+        Assertions.assertThrows(AlreadyExistsException.class, () -> game.register(player5));
     }
 }
