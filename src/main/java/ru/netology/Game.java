@@ -1,47 +1,41 @@
 package ru.netology;
-
-import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Game {
-    private ArrayList<Player> players = new ArrayList<>();
+    private HashMap<String, Integer> map = new HashMap<>();
 
     public void register(Player player) {
         String tmpName = player.getName();
-        if (player == findByName(tmpName)) {
-            throw new AlreadyExistsException(
-                    "Объект с данным именем уже зарегистрирован: " + tmpName
+        for (String tmp : map.keySet()) {
+            if (tmpName == tmp) {
+                throw new AlreadyExistsException(
+                        "Объект с данным именем уже зарегистрирован: " + tmpName
+                );
+            }
+        }
+        map.put(player.getName(), player.getStrength());
+
+    }
+
+    public int round(String playerName1, String playerName2) {
+        if (map.containsKey(playerName1) == false | map.containsKey(playerName2) == false) {
+            throw new NotRegisteredException(
+                    "В игре могут принимать участие только зарегистрированные пользователи"
             );
+        }
+
+        int v = map.get(playerName1);
+        int v2 = map.get(playerName2);
+
+        if (v > v2) {
+            return 1;
+        } else if (v < v2) {
+            return 2;
         } else {
-            players.add(player);
+            return 0;
         }
     }
 
-    public Player findByName(String name) {
-        for (Player player : players) {
-            if (player.getName() == name) {
-                return player;
-            }
-        }
-        return null;
-    }
 
-        public int round (String playerName1, String playerName2){
-            Player player1 = findByName(playerName1);
-            Player player2 = findByName(playerName2);
-             if (player1 == null | player2 == null){
-                 throw new NotRegisteredException(
-                         "В игре могут принимать участие только зарегистрированные пользователи");
-             }
-            if (player1.getStrength() > player2.getStrength()) {
-                return 1;
-            } else if (player1.getStrength() < player2.getStrength()) {
-                return 2;
-            } else {
-                return 0;
-            }
-        }
-
-
-
-    }
+}
 
