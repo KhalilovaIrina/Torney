@@ -1,24 +1,22 @@
 package ru.netology;
+
 import java.util.HashMap;
 
 public class Game {
     private HashMap<String, Integer> map = new HashMap<>();
 
     public void register(Player player) {
-        String tmpName = player.getName();
-        for (String tmp : map.keySet()) {
-            if (tmpName == tmp) {
-                throw new AlreadyExistsException(
-                        "Объект с данным именем уже зарегистрирован: " + tmpName
-                );
-            }
+        if (map.containsKey(player.getName())) {
+            throw new AlreadyExistsException(
+                    "Объект с данным именем уже зарегистрирован: " + player.getName()
+            );
         }
         map.put(player.getName(), player.getStrength());
-
     }
 
+
     public int round(String playerName1, String playerName2) {
-        if (map.containsKey(playerName1) == false | map.containsKey(playerName2) == false) {
+        if (!map.containsKey(playerName1) | !map.containsKey(playerName2)) {
             throw new NotRegisteredException(
                     "В игре могут принимать участие только зарегистрированные пользователи"
             );

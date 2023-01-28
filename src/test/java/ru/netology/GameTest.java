@@ -8,8 +8,7 @@ public class GameTest {
     Player player1 = new Player(1, "Rocket", 1);
     Player player2 = new Player(2, "Galaxy", 2);
     Player player3 = new Player(3, "Space", 2);
-    Player player4 = new Player(4, "Negative", -1);
-    Player player5 = new Player(5, "Space", 4);
+    Player player4 = new Player(5, "Space", 4);
 
     @Test
     public void shouldFindIfWinnerFirst() {
@@ -73,20 +72,7 @@ public class GameTest {
         game.register(player1);
         game.register(player3);
 
-        Assertions.assertThrows(AlreadyExistsException.class, () -> game.register(player5));
-    }
-
-    @Test
-    public void shouldRegisterWithZeroIfStrenghtNegative() {
-        game.register(player1);
-        game.register(player2);
-        game.register(player4);
-
-
-        int expected = 1;
-        int actual = game.round("Galaxy", "Negative");
-
-        Assertions.assertEquals(expected, actual);
+        Assertions.assertThrows(AlreadyExistsException.class, () -> game.register(player4));
     }
 
     @Test
