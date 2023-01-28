@@ -69,19 +69,6 @@ public class GameTest {
     }
 
     @Test
-    public void shouldRegisterWithZeroIfStrenghtNegative() {
-        game.register(player1);
-        game.register(player2);
-        game.register(player4);
-
-
-        int expected = 1;
-        int actual = game.round("Galaxy", "Negative");
-
-        Assertions.assertEquals(expected, actual);
-    }
-
-    @Test
     public void shouldFindWinnerIfEmpty() {
 
 

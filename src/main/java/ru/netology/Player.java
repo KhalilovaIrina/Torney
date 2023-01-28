@@ -1,4 +1,5 @@
 package ru.netology;
+
 public class Player {
     private int id;
     private String name;
@@ -16,13 +17,7 @@ public class Player {
 
 
     public int getStrength() {
-        if (strength >= 0){
-        this.strength = strength;
-        }else {
-            strength = 0;
-        }
         return strength;
-
     }
 
 }
